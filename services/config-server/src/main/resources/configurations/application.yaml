@@ -1,0 +1,16 @@
+eureka:
+  instance:
+    hostname: ${EUREKA_INSTANCE_HOSTNAME}
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URL}
+name:
+  value: ${APPLICATION_NAME}
+spring:
+  cloud:
+    config:
+      override-system-properties: ${OVERRIDE_SYSTEM_PROPERTIES}
+management:
+  tracing:
+    sampling:
+      probability: ${TRACING_SAMPLING_PROBABILITY}

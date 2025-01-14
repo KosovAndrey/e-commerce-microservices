@@ -1,0 +1,21 @@
+server:
+  port: ${PRODUCT_SERVICE_SERVER_PORT}
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${PRODUCT_SERVICE_DB_HOST}:${PRODUCT_SERVICE_DB_PORT}/${PRODUCT_SERVICE_DB_NAME}
+    username: ${PRODUCT_SERVICE_DB_USERNAME}
+    password: ${PRODUCT_SERVICE_DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    baseline-on-migrate: ${PRODUCT_SERVICE_FLYWAY_BASELINE_ON_MIGRATE:true}
+    enabled: ${PRODUCT_SERVICE_FLYWAY_ENABLED:true}
+    baseline-description: ${PRODUCT_SERVICE_FLYWAY_BASELINE_DESCRIPTION:"init"}
+    baseline-version: ${PRODUCT_SERVICE_FLYWAY_BASELINE_VERSION:0}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+

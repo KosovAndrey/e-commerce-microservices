@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME}
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${OAUTH2_ISSUER_URI}

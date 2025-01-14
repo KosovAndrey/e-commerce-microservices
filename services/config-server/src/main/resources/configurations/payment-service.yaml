@@ -1,0 +1,23 @@
+server:
+  port: ${PAYMENT_SERVICE_SERVER_PORT}
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${PAYMENT_SERVICE_DB_HOST}:${PAYMENT_SERVICE_DB_PORT}/${PAYMENT_SERVICE_DB_NAME}
+    username: ${PAYMENT_SERVICE_DB_USERNAME}
+    password: ${PAYMENT_SERVICE_DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    producer:
+      bootstrap-servers: ${PAYMENT_SERVICE_KAFKA_BOOTSTRAP_SERVERS}
+      key-serializer: ${PAYMENT_SERVICE_KAFKA_KEY_SERIALIZER:org.apache.kafka.common.serialization.StringSerializer}
+      value-serializer: ${PAYMENT_SERVICE_KAFKA_VALUE_SERIALIZER:org.springframework.kafka.support.serializer.JsonSerializer}
+      properties:
+        spring.json.type.mapping: ${PAYMENT_SERVICE_KAFKA_TYPE_MAPPING:paymentConfirmation:com.kosovandrey.ecommerce.notification.PaymentNotificationRequest}
+application:
+  config:
+    product-url: ${PRODUCT_URL}

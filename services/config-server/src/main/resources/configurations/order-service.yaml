@@ -1,0 +1,26 @@
+server:
+  port: ${ORDER_SERVICE_SERVER_PORT}
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${ORDER_SERVICE_DB_HOST}:${ORDER_SERVICE_DB_PORT}/${ORDER_SERVICE_DB_NAME}
+    username: ${ORDER_SERVICE_DB_USERNAME}
+    password: ${ORDER_SERVICE_DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    producer:
+      bootstrap-servers: ${ORDER_SERVICE_KAFKA_BOOTSTRAP_SERVERS}
+      key-serializer: ${ORDER_SERVICE_KAFKA_KEY_SERIALIZER:org.apache.kafka.common.serialization.StringSerializer}
+      value-serializer: ${ORDER_SERVICE_KAFKA_VALUE_SERIALIZER:org.springframework.kafka.support.serializer.JsonSerializer}
+      properties:
+        spring.json.type.mapping: ${ORDER_SERVICE_KAFKA_TYPE_MAPPING:orderConfirmation:com.kosovandrey.ecommerce.kafka.OrderConfirmation}
+
+application:
+  config:
+    customer-url: ${CUSTOMER_URL}
+    payment-url: ${PAYMENT_URL}
+    product-url: ${PRODUCT_URL}
