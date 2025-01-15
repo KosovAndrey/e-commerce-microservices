@@ -9,8 +9,8 @@ name:
 spring:
   cloud:
     config:
-      override-system-properties: ${OVERRIDE_SYSTEM_PROPERTIES}
+      override-system-properties: ${OVERRIDE_SYSTEM_PROPERTIES:false}
 management:
   tracing:
     sampling:
-      probability: ${TRACING_SAMPLING_PROBABILITY}
+      probability: ${TRACING_SAMPLING_PROBABILITY:1.0}

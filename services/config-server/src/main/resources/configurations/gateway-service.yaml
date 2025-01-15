@@ -5,7 +5,7 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: ${GATEWAY_DISCOVERY_LOCATOR_ENABLED}
+          enabled: ${GATEWAY_DISCOVERY_LOCATOR_ENABLED:true}
       routes:
         - id: customer-service
           uri: lb:http://${CUSTOMER_SERVICE_NAME}
