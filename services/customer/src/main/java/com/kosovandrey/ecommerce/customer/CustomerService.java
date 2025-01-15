@@ -5,11 +5,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -104,7 +102,7 @@ public class CustomerService {
      * @param customer клиент, данные которого нужно обновить
      * @param request  данные для обновления
      */
-    private void mergeCustomerData(Customer customer, CustomerRequest request) {
+    void mergeCustomerData(Customer customer, CustomerRequest request) {
         if (request.firstName() != null) customer.setFirstName(request.firstName());
         if (request.lastName() != null) customer.setLastName(request.lastName());
         if (request.email() != null) customer.setEmail(request.email());
