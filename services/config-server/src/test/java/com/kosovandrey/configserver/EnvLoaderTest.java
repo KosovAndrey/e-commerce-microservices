@@ -3,7 +3,6 @@ package com.kosovandrey.configserver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -22,8 +21,10 @@ class EnvLoaderTest {
      */
     @BeforeEach
     void cleanup() {
-        System.getProperties().stringPropertyNames()
-                .forEach(System::clearProperty);
+        System.clearProperty("TEST_KEY");
+        System.clearProperty("TEST_KEY1");
+        System.clearProperty("TEST_KEY2");
+        System.clearProperty("MALFORMED_ENTRY");
     }
 
     /**
@@ -38,8 +39,6 @@ class EnvLoaderTest {
         EnvLoader.loadEnv(TEST_ENV_FILE);
 
         assertEquals("TEST_VALUE", System.getProperty("TEST_KEY"));
-
-        new File(TEST_ENV_FILE).delete();
     }
 
     /**
@@ -47,8 +46,6 @@ class EnvLoaderTest {
      */
     @Test
     void shouldHandleMissingEnvFile() {
-        new File(TEST_ENV_FILE).delete();
-
         EnvLoader.loadEnv();
 
         assertNull(System.getProperty("TEST_KEY"));
@@ -67,7 +64,6 @@ class EnvLoaderTest {
 
         assertNull(System.getProperty("TEST_KEY"));
 
-        new File(TEST_ENV_FILE).delete();
     }
 
     /**
@@ -82,8 +78,6 @@ class EnvLoaderTest {
         EnvLoader.loadEnv();
 
         assertNull(System.getProperty("MALFORMED_ENTRY"));
-
-        new File(TEST_ENV_FILE).delete();
     }
 
     /**
@@ -99,8 +93,6 @@ class EnvLoaderTest {
 
         assertEquals("TEST_VALUE1", System.getProperty("TEST_KEY1"));
         assertEquals("TEST_VALUE2", System.getProperty("TEST_KEY2"));
-
-        new File(TEST_ENV_FILE).delete();
     }
 
     /**
@@ -115,8 +107,6 @@ class EnvLoaderTest {
         EnvLoader.loadEnv(TEST_ENV_FILE);
 
         assertEquals("TEST_VALUE", System.getProperty("TEST_KEY"));
-
-        new File(TEST_ENV_FILE).delete();
     }
 
     /**
@@ -131,8 +121,6 @@ class EnvLoaderTest {
         EnvLoader.loadEnv(TEST_ENV_FILE);
 
         assertEquals("TEST_VALUE", System.getProperty("TEST_KEY"));
-
-        new File(TEST_ENV_FILE).delete();
     }
 
     /**
@@ -147,8 +135,6 @@ class EnvLoaderTest {
         EnvLoader.loadEnv(TEST_ENV_FILE);
 
         assertEquals("TEST_VALUE", System.getProperty("TEST_KEY"));
-
-        new File(TEST_ENV_FILE).delete();
     }
 
     /**
@@ -163,8 +149,6 @@ class EnvLoaderTest {
         EnvLoader.loadEnv(TEST_ENV_FILE);
 
         assertEquals("TEST_VALUE_WITH_SPECIAL_CHARS_!@#$%^&*()", System.getProperty("TEST_KEY"));
-
-        new File(TEST_ENV_FILE).delete();
     }
 
     /**
